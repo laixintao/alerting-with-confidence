@@ -7,6 +7,9 @@ style: |
   section.question h4 {
     color: red
   }
+  section.center {
+    text-align: center;
+  }
 ---
 
 <!-- _class: lead -->
@@ -121,7 +124,6 @@ node_alert.yaml: 0:0: group "node-general", rule 1, "": one of 'record' or 'aler
 
 ---
 
-
 ![bg left:50% width:400px](./images/replay-results.png)
 
 Including:
@@ -173,7 +175,87 @@ Unit Testing:  test.yaml
 
 ---
 
+Image when you received this alert, what's the first thing that you want to know?
+
+![width:600px](./images/text-alert.png)
+
+---
+
+Yes.
+
+> How bad is it?
+
+That's the question comes to everyone on-call.
+
+---
+
+![width:500px](./images/chart-cpu.png)
+
+> This is fine, some team is doing stress test.
+
+---
+
+<!-- _class: center -->
+
+### Common patterns of CPU usage
+
+![width:700px](./images/cpu-chart-patterns.png)
+
+---
+
+### The alert chart 📊 can give us more confidence, let's have it!
+
+---
+
+Query metrics data, then render image
+
+Sounds easy, right?
+
+![bg right width:700px](./images/shwoing-the-alert.png)
+
+
+---
+
+The Problem: Prometheus only fires alerts when result is not null, so if you query alert rules:
+
+```
+100 - (
+  (node_memory_MemAvailable_bytes{instance="",job="node"} * 100) / 
+    node_memory_MemTotal_bytes{instance="",job="node"}
+  ) > 5.5
+```
+
+The result will be looks like this:
+
+![width:600px](./images/alert-rules-only-non-null.png)
+
+---
+
+Solution: Let's have some fun with PromQL!
+
+[laixintao/promqlpy](https://github.com/laixintao/promqlpy) project
+
+![width:800px](./images/rule2.png)
+
+---
+
+Render images using [laixintao/metrics-render](https://github.com/laixintao/metrics-render) project, add render links into alert message template.
+
+![width:800px](./images/alert-with-image.png)
+
+---
+
 ## Review Alerts with Confidence <!--fit-->
+
+---
+
+![](./images/review.png)
+
+---
+
+<!-- _class:center -->
+
+![bg width:500px](./images/reaction-example.png)
 
 ---
 
