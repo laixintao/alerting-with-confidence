@@ -253,6 +253,10 @@ Render images using [laixintao/metrics-render](https://github.com/laixintao/metr
 
 ---
 
+![](./images/reaction-system-recording.png)
+
+---
+
 <!-- _class:center -->
 
 ![bg width:500px](./images/reaction-example.png)
